@@ -108,6 +108,13 @@ Gravity PDF can be run on most modern shared web hosting without any issues. It 
 
 == Changelog ==
 
+= 6.12.2 =
+* Security: Fix bug that caused the 'Restrict Owner' PDF setting to be ignored when it was enabled
+* Housekeeping: Adjust canonical plugin notice
+* Housekeeping: Add canonical plugin check on system report
+* Housekeeping: Log license check API calls (canonical only)
+* Bug: Fix PHP Notices in admin area
+
 = 6.12.1 =
 * Housekeeping: Update translations
 
