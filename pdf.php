@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Gravity PDF
-Version: 6.12.0
+Version: 6.12.2
 Description: Automatically generate highly-customizable PDF documents using Gravity Forms and WordPress (canonical)
 Author: Blue Liquid Designs
 Author URI: https://blueliquiddesigns.com.au
@@ -36,7 +36,7 @@ if ( defined( 'PDF_PLUGIN_BASENAME' ) ) {
 /*
  * Set base constants we'll use throughout the plugin
  */
-define( 'PDF_EXTENDED_VERSION', '6.12.0' ); /* the current plugin version */
+define( 'PDF_EXTENDED_VERSION', '6.12.2' ); /* the current plugin version */
 define( 'PDF_PLUGIN_DIR', plugin_dir_path( __FILE__ ) ); /* plugin directory path */
 define( 'PDF_PLUGIN_URL', plugin_dir_url( __FILE__ ) ); /* plugin directory url */
 define( 'PDF_PLUGIN_BASENAME', plugin_basename( __FILE__ ) ); /* the plugin basename */
@@ -488,7 +488,7 @@ if ( ! class_exists( 'GFPDF_Major_Compatibility_Checks' ) ) {
 
 			$message = wp_kses(
 				sprintf(
-					__( 'For security, Gravity PDF has moved the canonical plugin off WordPress.org. In order to get updates directly from GravityPDF.com %1$syou must perform a one-time download of the plugin to remain safe in the future%2$s.', 'gravity-pdf' ),
+					__( 'The Gravity PDF plugin has a new home! In order to get updates direct from GravityPDF.com %1$syou need to perform a one-time download of the plugin%2$s.', 'gravity-pdf' ),
 					'<a href="https://gravitypdf.com/news/installing-and-upgrading-to-the-canonical-version-of-gravity-pdf/">',
 					'</a>',
 				),
@@ -524,11 +524,11 @@ if ( ! class_exists( 'GFPDF_Major_Compatibility_Checks' ) ) {
 			);
 
 			echo '<td colspan="4" class="plugin-update colspanchange">';
-			echo '<div class="update-message notice inline notice-warning notice-alt"><p>';
+			echo '<div class="notice inline notice-warning notice-alt"><p>';
 
 			echo wp_kses(
 				sprintf(
-					__( 'For security, the canonical plugin has moved off WordPress.org. In order to get safe updates directly from GravityPDF.com %1$syou must perform a one-time download of the plugin%2$s.', 'gravity-pdf' ),
+					__( 'The Gravity PDF plugin has a new home! In order to get updates direct from GravityPDF.com %1$syou need to perform a one-time download of the plugin%2$s.', 'gravity-pdf' ),
 					'<a href="https://gravitypdf.com/news/installing-and-upgrading-to-the-canonical-version-of-gravity-pdf/">',
 					'</a>',
 				),

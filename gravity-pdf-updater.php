@@ -40,6 +40,54 @@ add_action(
 );
 
 /**
+ * Log licencing API calls for debugging
+ */
+add_action(
+	'http_api_debug',
+	function( $response, $context, $class, $parsed_args, $url ) {
+		if ( $url !== GPDF_API_URL ) {
+			return;
+		}
+
+		$logger = \GPDFAPI::get_log_class();
+
+		$request_body = $parsed_args['body'] ?? [];
+		if ( isset( $request_body['license'] ) ) {
+			/* mask the license key, if exists */
+			$license                 = $request_body['license'];
+			$request_body['license'] = substr( $license, 0, 1 ) . str_repeat( '*', strlen( $license ) - 2 ) . substr( $license, -1, 1 );
+		}
+
+		$logger->notice(
+			'Gravity PDF License Check API Request',
+			[
+				'url'    => $url,
+				'method' => $parsed_args['method'] ?? '',
+				'body'   => $request_body,
+			]
+		);
+
+		$response_code    = wp_remote_retrieve_response_code( $response );
+		$response_context = [
+			'status'  => $response_code,
+			'headers' => wp_remote_retrieve_headers( $response ),
+			'body'    => wp_remote_retrieve_body( $response ),
+		];
+
+		if ( $response_code >= 300 ) {
+			// response failed
+			$logger->warning( 'Gravity PDF License Check API Response', $response_context );
+		} else {
+			// response success
+			$logger->notice( 'Gravity PDF License Check API Response', $response_context );
+		}
+	},
+	10,
+	5
+);
+
+
+/**
  * Remove dismissible message about upgrading
  *
  * @since 6.12.0
@@ -75,7 +123,7 @@ add_action(
 		echo '<td colspan="4" class="plugin-update colspanchange">';
 		echo '<div class="notice inline notice-warning notice-alt"><p>';
 
-		echo esc_html__( 'This is the non-canonical version of Gravity PDF.', 'gravity-pdf' );
+		echo esc_html__( 'This is the non-canonical release of Gravity PDF.', 'gravity-pdf' );
 
 		echo '</p></div>';
 		echo '</td>';

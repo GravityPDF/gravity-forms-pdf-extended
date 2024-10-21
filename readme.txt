@@ -5,16 +5,16 @@ Donate link: https://gravitypdf.com/donate-to-plugin/
 Tags: gravity forms, form, contact form, pdf, email
 Requires at least: 5.3
 Tested up to: 6.6
-Stable tag: 6.12.0
+Stable tag: 6.12.2
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.txt
 
-Automatically generate, email and download PDF documents with Gravity Forms and Gravity PDF.
+Automatically generate, email and download PDF documents from Gravity Forms entries
 
 == Description ==
 
-**Gravity PDF is the ultimate self-hosted solution for dynamically creating PDF documents using Gravity Forms and WordPress.**
+**Gravity PDF is the ultimate third-party PDF automation tool for generating digital PDFs using the popular form-builder plugin Gravity Forms.**
 
 = Highly Customizable PDFs =
 
@@ -107,6 +107,16 @@ Gravity PDF can be run on most modern shared web hosting without any issues. It 
 16. A bunch of paid PDF designs are available, as well as additional functionality.
 
 == Changelog ==
+
+= 6.12.2 =
+* Security: Fix bug that caused the 'Restrict Owner' PDF setting to be ignored when it was enabled
+* Housekeeping: Adjust canonical plugin notice
+* Housekeeping: Add canonical plugin check on system report
+* Housekeeping: Log license check API calls (canonical only)
+* Bug: Fix PHP Notices in admin area
+
+= 6.12.1 =
+* Housekeeping: Update translations
 
 = 6.12.0 =
 * Feature: Add basic support for Gravity Forms 2.9 Image Choice and Multiple Choice fields (Gravity PDF Core Booster v2.2 can show the images)
@@ -454,30 +464,4 @@ This major release is designed specifically for Gravity Forms 2.5+ and includes 
 * Add better error log messages for PDF Merge tag processing
 * Pass additional information to the `gfpdf_field_container_class` filter
 
-See [CHANGELOG.txt](https://github.com/GravityPDF/gravity-pdf/blob/master/CHANGELOG.txt) for version 5/4/3 changelog history.
-
-== Upgrade Notice ==
-
-= 6.0.2 =
-WARNING: Breaking changes! New minimum versions: PHP7.3+, WordPress 5.3+, Gravity Forms 2.5+.
-
-= 6.0.1 =
-WARNING: Breaking changes! New minimum versions: PHP7.3+, WordPress 5.3+, Gravity Forms 2.5+.
-
-= 6.0.0 =
-WARNING: Breaking changes! New minimum versions: PHP7.3+, WordPress 5.3+, Gravity Forms 2.5+.
-
-= 5.0.0 =
-WARNING: Breaking changes! New minimum versions: PHP5.6+, WordPress 4.8+, Gravity Forms 2.3.1+.
-
-= 4.2.0 =
-WARNING: The minimum WordPress version supported is now 4.4.
-
-= 4.0.4 =
-This patch fixes a PDF security by-passing issue. If you use the PDF Security settings update immediately.
-
-= 4.0.3 =
-The core PDF templates have been updated to version 1.1. If you've previously run the Custom Template Setup make sure you run it again to take advantage of the changes.
-
-= 4.0 =
-**WARNING**: This major release is not 100% backwards compatibile with v3. Review our upgrade guide AND do a full backup before proceeding with the update (https://goo.gl/htd6CK).
+See [CHANGELOG.txt](https://github.com/GravityPDF/gravity-pdf/blob/development/CHANGELOG.txt) for version 5/4/3 changelog history.

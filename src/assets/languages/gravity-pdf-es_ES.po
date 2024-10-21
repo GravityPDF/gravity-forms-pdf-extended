@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gravity PDF\n"
-"POT-Creation-Date: 2024-10-15 02:27+0000\n"
+"POT-Creation-Date: 2024-10-21 04:06+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -43,8 +43,8 @@ msgstr ""
 "No se ha podido localizar la configuración del PDF. Asegúrese de introducir "
 "un ID de PDF válido."
 
-#: ../../../gravity-pdf-updater.php:78
-msgid "This is the non-canonical version of Gravity PDF."
+#: ../../../gravity-pdf-updater.php:126
+msgid "This is the non-canonical release of Gravity PDF."
 msgstr "Esta es la versión no canónica de Gravity PDF."
 
 #. translators: 1. WordPress version number 2. HTML Anchor Open Tag 3. Html Anchor Close Tag
@@ -137,26 +137,14 @@ msgstr ""
 "No se cumplen los requisitos mínimos de Gravity PDF. Solucione los problemas "
 "que se indican a continuación para poder utilizar el plugin:"
 
-#: ../../../pdf.php:491
+#: ../../../pdf.php:491, ../../../pdf.php:531
 msgid ""
-"For security, Gravity PDF has moved the canonical plugin off WordPress.org. "
-"In order to get updates directly from GravityPDF.com %1$syou must perform a "
-"one-time download of the plugin to remain safe in the future%2$s."
+"The Gravity PDF plugin has a new home! In order to get updates direct from "
+"GravityPDF.com %1$syou need to perform a one-time download of the plugin%2$s."
 msgstr ""
-"Por motivos de seguridad, Gravity PDF ha retirado el plugin canonical de "
-"WordPress.org. Para obtener actualizaciones directamente de GravityPDF.com "
-"%1$sdebe realizar una única descarga del plugin para permanecer seguro en el "
-"futuro%2$s."
-
-#: ../../../pdf.php:531
-msgid ""
-"For security, the canonical plugin has moved off WordPress.org. In order to "
-"get safe updates directly from GravityPDF.com %1$syou must perform a one-"
-"time download of the plugin%2$s."
-msgstr ""
-"Por motivos de seguridad, el plugin canonical se ha trasladado fuera de "
-"WordPress.org. Para obtener actualizaciones seguras directamente de "
-"GravityPDF.com %1$sdebe realizar una única descarga del plugin%2$s."
+"¡El plugin Gravity PDF tiene un nuevo hogar! Para obtener actualizaciones "
+"directamente de GravityPDF.com %1$ses necesario realizar una única descarga "
+"del plugin%2$s."
 
 #: ../../bootstrap.php:134, ../../bootstrap.php:146, ../../deprecated.php:45,
 #: ../../deprecated.php:58
@@ -756,11 +744,11 @@ msgstr "Actualizado exitosamente"
 msgid "Successfully Deleted"
 msgstr "Eliminado correctamente"
 
-#: ../../Helper/Helper_Data.php:238
+#: ../../Helper/Helper_Data.php:238, ../../Model/Model_System_Report.php:264
 msgid "No"
 msgstr "No"
 
-#: ../../Helper/Helper_Data.php:239
+#: ../../Helper/Helper_Data.php:239, ../../Model/Model_System_Report.php:264
 msgid "Yes"
 msgstr "Sí"
 
@@ -1270,19 +1258,19 @@ msgstr ""
 "página %1$sLista de entradas de Gravity Forms%2$s."
 
 #: ../../Helper/Helper_Options_Fields.php:139,
-#: ../../Model/Model_System_Report.php:253,
+#: ../../Model/Model_System_Report.php:269,
 #: ../../View/html/PDF/entry_detailed_pdf.php:35
 msgid "View"
 msgstr "Ver"
 
 #: ../../Helper/Helper_Options_Fields.php:140,
-#: ../../Model/Model_System_Report.php:253,
+#: ../../Model/Model_System_Report.php:269,
 #: ../../View/html/PDF/entry_detailed_pdf.php:36
 msgid "Download"
 msgstr "Descarga"
 
 #: ../../Helper/Helper_Options_Fields.php:147,
-#: ../../Model/Model_System_Report.php:258
+#: ../../Model/Model_System_Report.php:274
 msgid "Background Processing"
 msgstr "Proceso de fondo"
 
@@ -1297,7 +1285,7 @@ msgstr ""
 "tareas en segundo plano estén habilitadas%2$s."
 
 #: ../../Helper/Helper_Options_Fields.php:155,
-#: ../../Model/Model_System_Report.php:264
+#: ../../Model/Model_System_Report.php:280
 msgid "Debug Mode"
 msgstr "Modo de Depuración"
 
@@ -1311,7 +1299,7 @@ msgstr ""
 
 #: ../../Helper/Helper_Options_Fields.php:169,
 #: ../../Helper/Helper_Options_Fields.php:175,
-#: ../../Model/Model_System_Report.php:278
+#: ../../Model/Model_System_Report.php:294
 msgid "Logged Out Timeout"
 msgstr "Desconectado Tiempo de espera"
 
@@ -2065,20 +2053,32 @@ msgstr "mPDF Ubicación temporal"
 msgid "Outdated Templates"
 msgstr "Plantillas desactualizadas"
 
-#: ../../Model/Model_System_Report.php:252
+#: ../../Model/Model_System_Report.php:253
+msgid ""
+"In order to get updates direct from GravityPDF.com %1$syou need to perform a "
+"one-time download of the plugin%2$s."
+msgstr ""
+"Para obtener actualizaciones directamente de GravityPDF.com %1$sdebe "
+"realizar una única descarga del plugin%2$s."
+
+#: ../../Model/Model_System_Report.php:262
+msgid "Canonical Release"
+msgstr "Canonical Release"
+
+#: ../../Model/Model_System_Report.php:268
 msgid "PDF Entry List Action"
 msgstr "Acción Lista de entrada PDF"
 
-#: ../../Model/Model_System_Report.php:259,
-#: ../../Model/Model_System_Report.php:265
+#: ../../Model/Model_System_Report.php:275,
+#: ../../Model/Model_System_Report.php:281
 msgid "Off"
 msgstr "Apagado"
 
-#: ../../Model/Model_System_Report.php:273
+#: ../../Model/Model_System_Report.php:289
 msgid "User Restrictions"
 msgstr "Restricciones para el usuario"
 
-#: ../../Model/Model_System_Report.php:279
+#: ../../Model/Model_System_Report.php:295
 msgid "minute(s)"
 msgstr "minuto(s)"
 
