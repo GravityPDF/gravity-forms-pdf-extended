@@ -457,30 +457,4 @@ This major release is designed specifically for Gravity Forms 2.5+ and includes 
 * Add better error log messages for PDF Merge tag processing
 * Pass additional information to the `gfpdf_field_container_class` filter
 
-See [CHANGELOG.txt](https://github.com/GravityPDF/gravity-pdf/blob/master/CHANGELOG.txt) for version 5/4/3 changelog history.
-
-== Upgrade Notice ==
-
-= 6.0.2 =
-WARNING: Breaking changes! New minimum versions: PHP7.3+, WordPress 5.3+, Gravity Forms 2.5+.
-
-= 6.0.1 =
-WARNING: Breaking changes! New minimum versions: PHP7.3+, WordPress 5.3+, Gravity Forms 2.5+.
-
-= 6.0.0 =
-WARNING: Breaking changes! New minimum versions: PHP7.3+, WordPress 5.3+, Gravity Forms 2.5+.
-
-= 5.0.0 =
-WARNING: Breaking changes! New minimum versions: PHP5.6+, WordPress 4.8+, Gravity Forms 2.3.1+.
-
-= 4.2.0 =
-WARNING: The minimum WordPress version supported is now 4.4.
-
-= 4.0.4 =
-This patch fixes a PDF security by-passing issue. If you use the PDF Security settings update immediately.
-
-= 4.0.3 =
-The core PDF templates have been updated to version 1.1. If you've previously run the Custom Template Setup make sure you run it again to take advantage of the changes.
-
-= 4.0 =
-**WARNING**: This major release is not 100% backwards compatibile with v3. Review our upgrade guide AND do a full backup before proceeding with the update (https://goo.gl/htd6CK).
+See [CHANGELOG.txt](https://github.com/GravityPDF/gravity-pdf/blob/development/CHANGELOG.txt) for version 5/4/3 changelog history.
