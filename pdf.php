@@ -488,7 +488,7 @@ if ( ! class_exists( 'GFPDF_Major_Compatibility_Checks' ) ) {
 
 			$message = wp_kses(
 				sprintf(
-					__( 'For security, Gravity PDF has moved the canonical plugin off WordPress.org. In order to get updates directly from GravityPDF.com %1$syou must perform a one-time download of the plugin to remain safe in the future%2$s.', 'gravity-pdf' ),
+					__( 'The Gravity PDF plugin has a new home! In order to get updates direct from GravityPDF.com %1$syou need to perform a one-time download of the plugin%2$s.', 'gravity-pdf' ),
 					'<a href="https://gravitypdf.com/news/installing-and-upgrading-to-the-canonical-version-of-gravity-pdf/">',
 					'</a>',
 				),
@@ -524,11 +524,11 @@ if ( ! class_exists( 'GFPDF_Major_Compatibility_Checks' ) ) {
 			);
 
 			echo '<td colspan="4" class="plugin-update colspanchange">';
-			echo '<div class="update-message notice inline notice-warning notice-alt"><p>';
+			echo '<div class="notice inline notice-warning notice-alt"><p>';
 
 			echo wp_kses(
 				sprintf(
-					__( 'For security, the canonical plugin has moved off WordPress.org. In order to get safe updates directly from GravityPDF.com %1$syou must perform a one-time download of the plugin%2$s.', 'gravity-pdf' ),
+					__( 'The Gravity PDF plugin has a new home! In order to get updates direct from GravityPDF.com %1$syou need to perform a one-time download of the plugin%2$s.', 'gravity-pdf' ),
 					'<a href="https://gravitypdf.com/news/installing-and-upgrading-to-the-canonical-version-of-gravity-pdf/">',
 					'</a>',
 				),

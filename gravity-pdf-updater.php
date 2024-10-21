@@ -75,7 +75,7 @@ add_action(
 		echo '<td colspan="4" class="plugin-update colspanchange">';
 		echo '<div class="notice inline notice-warning notice-alt"><p>';
 
-		echo esc_html__( 'This is the non-canonical version of Gravity PDF.', 'gravity-pdf' );
+		echo esc_html__( 'This is the non-canonical release of Gravity PDF.', 'gravity-pdf' );
 
 		echo '</p></div>';
 		echo '</td>';
