@@ -489,10 +489,15 @@ if ( ! class_exists( 'GFPDF_Major_Compatibility_Checks' ) ) {
 			$message = wp_kses(
 				sprintf(
 					__( 'The Gravity PDF plugin has a new home! In order to get updates direct from GravityPDF.com %1$syou need to perform a one-time download of the plugin%2$s.', 'gravity-pdf' ),
-					'<a href="https://gravitypdf.com/news/installing-and-upgrading-to-the-canonical-version-of-gravity-pdf/">',
+					'<a href="https://gravitypdf.com/news/installing-and-upgrading-to-the-canonical-version-of-gravity-pdf/" target="_blank">',
 					'</a>',
 				),
-				[ 'a' => [ 'href' => true ] ]
+				[
+					'a' => [
+						'href'   => true,
+						'target' => true,
+					],
+				]
 			);
 
 			\GFCommon::add_dismissible_message(
@@ -529,10 +534,15 @@ if ( ! class_exists( 'GFPDF_Major_Compatibility_Checks' ) ) {
 			echo wp_kses(
 				sprintf(
 					__( 'The Gravity PDF plugin has a new home! In order to get updates direct from GravityPDF.com %1$syou need to perform a one-time download of the plugin%2$s.', 'gravity-pdf' ),
-					'<a href="https://gravitypdf.com/news/installing-and-upgrading-to-the-canonical-version-of-gravity-pdf/">',
+					'<a href="https://gravitypdf.com/news/installing-and-upgrading-to-the-canonical-version-of-gravity-pdf/" target="_blank">',
 					'</a>',
 				),
-				[ 'a' => [ 'href' => true ] ]
+				[
+					'a' => [
+						'href'   => true,
+						'target' => true,
+					],
+				]
 			);
 
 			echo '</p></div>';
