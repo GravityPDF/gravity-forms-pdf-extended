@@ -45,7 +45,13 @@ add_action(
 add_action(
 	'http_api_debug',
 	function( $response, $context, $class, $parsed_args, $url ) {
+		/* Log only Gravity PDF requests */
 		if ( $url !== GPDF_API_URL ) {
+			return;
+		}
+
+		/* Only log requests when fully initialized */
+		if ( ! class_exists( 'GPDFAPI' ) ) {
 			return;
 		}
 

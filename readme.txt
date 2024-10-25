@@ -110,6 +110,7 @@ Gravity PDF can be run on most modern shared web hosting without any issues. It 
 
 = 6.12.3 =
 * Bug: Resolve PHP error when a license has not been activated for a Gravity PDF extension
+* Bug: Resolve PHP error when all plugin dependencies are not met
 * Housekeeping: Open canonical plugin upgrade link in new window
 
 = 6.12.2 =
