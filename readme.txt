@@ -5,7 +5,7 @@ Donate link: https://gravitypdf.com/donate-to-plugin/
 Tags: gravity forms, form, contact form, pdf, email
 Requires at least: 5.3
 Tested up to: 6.6
-Stable tag: 6.12.2
+Stable tag: 6.12.3
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.txt
@@ -107,6 +107,10 @@ Gravity PDF can be run on most modern shared web hosting without any issues. It 
 16. A bunch of paid PDF designs are available, as well as additional functionality.
 
 == Changelog ==
+
+= 6.12.3 =
+* Bug: Resolve PHP error when a license has not been activated for a Gravity PDF extension
+* Housekeeping: Open canonical plugin upgrade link in new window
 
 = 6.12.2 =
 * Security: Fix bug that caused the 'Restrict Owner' PDF setting to be ignored when it was enabled
