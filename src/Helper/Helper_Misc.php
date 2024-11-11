@@ -328,19 +328,19 @@ class Helper_Misc {
 	/**
 	 * Push an associative array onto the beginning of an existing array
 	 *
-	 * @param array  $array The array to push onto
-	 * @param string $key   The key to use for the newly-pushed array
-	 * @param mixed  $val   The value being pushed
+	 * @param array  $array_to_update The array to push onto
+	 * @param string $key             The key to use for the newly-pushed array
+	 * @param mixed  $val             The value being pushed
 	 *
 	 * @return array  The modified array
 	 *
 	 * @since 4.0
 	 */
-	public function array_unshift_assoc( $array, $key, $val ) {
-		$array         = array_reverse( $array, true );
-		$array[ $key ] = $val;
+	public function array_unshift_assoc( $array_to_update, $key, $val ) {
+		$array_to_update         = array_reverse( $array_to_update, true );
+		$array_to_update[ $key ] = $val;
 
-		return array_reverse( $array, true );
+		return array_reverse( $array_to_update, true );
 	}
 
 	/**
@@ -387,7 +387,7 @@ class Helper_Misc {
 
 		$results = true;
 		if ( $delete_top_level_dir ) {
-			$results = rmdir( $dir );
+			$results = rmdir( $dir ); //phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
 			if ( ! $results ) {
 				$this->log->error( sprintf( 'Could not delete the top-level directory: %s', $dir ) );
 			}
@@ -446,7 +446,7 @@ class Helper_Misc {
 			foreach ( $files as $fileinfo ) {
 				if ( $fileinfo->isDir() && ! file_exists( $destination . $files->getSubPathName() ) ) {
 					/* phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged */
-					if ( ! @mkdir( $destination . $files->getSubPathName() ) ) {
+					if ( wp_mkdir_p( $destination . $files->getSubPathName() ) ) {
 						$this->log->error(
 							'Failed Creating Folder',
 							[
@@ -454,7 +454,7 @@ class Helper_Misc {
 							]
 						);
 
-						throw new Exception( 'Could not create folder at ' . $destination . $files->getSubPathName() );
+						throw new Exception( 'Could not create folder at ' . esc_html( $destination . $files->getSubPathName() ) );
 					}
 				} elseif ( ! $fileinfo->isDir() ) {
 					if ( ! copy( $fileinfo, $destination . $files->getSubPathName() ) ) {
@@ -464,7 +464,7 @@ class Helper_Misc {
 								'file' => $destination . $files->getSubPathName(),
 							]
 						);
-						throw new Exception( 'Could not create file at ' . $destination . $files->getSubPathName() );
+						throw new Exception( 'Could not create file at ' . esc_html( $destination . $files->getSubPathName() ) );
 					}
 				}
 			}
@@ -732,21 +732,21 @@ class Helper_Misc {
 	/**
 	 * Remove an extension from the end of a string
 	 *
-	 * @param string $string
+	 * @param string $text
 	 * @param string $type The extension to remove from the end of the string
 	 *
 	 * @return string
 	 *
 	 * @since 4.0
 	 */
-	public function remove_extension_from_string( $string, $type = '.pdf' ) {
+	public function remove_extension_from_string( $text, $type = '.pdf' ) {
 		$type_length = mb_strlen( $type );
 
-		if ( mb_strtolower( mb_substr( $string, -$type_length ) ) === mb_strtolower( $type ) ) {
-			$string = mb_substr( $string, 0, -$type_length );
+		if ( mb_strtolower( mb_substr( $text, -$type_length ) ) === mb_strtolower( $type ) ) {
+			$text = mb_substr( $text, 0, -$type_length );
 		}
 
-		return $string;
+		return $text;
 	}
 
 	/**

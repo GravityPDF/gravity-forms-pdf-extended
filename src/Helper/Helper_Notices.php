@@ -79,32 +79,32 @@ class Helper_Notices implements Helper_Interface_Actions {
 	/**
 	 * Public endpoint for adding a new notice
 	 *
-	 * @param string $notice The message to be queued
-	 * @param string $class  The class that should be included with the notice box
+	 * @param string $notice    The message to be queued
+	 * @param string $css_class The class that should be included with the notice box
 	 *
 	 * @since 4.0
 	 */
-	public function add_notice( string $notice, string $class = '' ): void {
-		if ( empty( $class ) ) {
+	public function add_notice( $notice, $css_class = '' ): void {
+		if ( empty( $css_class ) ) {
 			$this->notices[] = $notice;
 		} else {
-			$this->notices[ $class ] = $notice;
+			$this->notices[ $css_class ] = $notice;
 		}
 	}
 
 	/**
 	 * Public endpoint for adding a new notice
 	 *
-	 * @param string $error The error message that should be added
-	 * @param string $class Any class names that should apply to the error
+	 * @param string $error     The error message that should be added
+	 * @param string $css_class Any class names that should apply to the error
 	 *
 	 * @since    4.0
 	 */
-	public function add_error( string $error, string $class = '' ) {
-		if ( empty( $class ) ) {
+	public function add_error( $error, $css_class = '' ) {
+		if ( empty( $css_class ) ) {
 			$this->errors[] = $error;
 		} else {
-			$this->errors[ $class ] = $error;
+			$this->errors[ $css_class ] = $error;
 		}
 	}
 
@@ -154,13 +154,13 @@ class Helper_Notices implements Helper_Interface_Actions {
 			return;
 		}
 
-		foreach ( $this->notices as $class => $notice ) {
-			$include_class = ( ! is_int( $class ) ) ? $class : '';
+		foreach ( $this->notices as $css_class => $notice ) {
+			$include_class = ( ! is_int( $css_class ) ) ? $css_class : '';
 			$this->html( $notice, 'updated ' . $include_class );
 		}
 
-		foreach ( $this->errors as $class => $error ) {
-			$include_class = ( ! is_int( $class ) ) ? $class : '';
+		foreach ( $this->errors as $css_class => $error ) {
+			$include_class = ( ! is_int( $css_class ) ) ? $css_class : '';
 			$this->html( $error, 'error ' . $include_class );
 		}
 	}
@@ -168,13 +168,13 @@ class Helper_Notices implements Helper_Interface_Actions {
 	/**
 	 * Generate the HTML used to display the notice / error
 	 *
-	 * @param string $text  The message to be displayed
-	 * @param string $class The class name (updated / error)
+	 * @param string $text      The message to be displayed
+	 * @param string $css_class The class name (updated / error)
 	 *
 	 * @since 4.0
 	 */
-	protected function html( string $text, string $class = 'updated' ): void {
-		$allow_form_elements = static function( $tags ) {
+	protected function html( string $text, string $css_class = 'updated' ): void {
+		$allow_form_elements = static function ( $tags ) {
 			$tags['input'] = [
 				'type'  => true,
 				'name'  => true,
@@ -189,10 +189,10 @@ class Helper_Notices implements Helper_Interface_Actions {
 
 		/* Add specific classes on Gravity Forms page so the notice displays correctly */
 		if ( class_exists( 'GFForms' ) && \GFForms::is_gravity_page() ) {
-			$classes  = 'notice gf-notice gform-settings__wrapper ' . $class;
-			$classes .= strpos( $class, 'updated' ) !== false ? ' notice-success' : '';
+			$classes  = 'notice gf-notice gform-settings__wrapper ' . $css_class;
+			$classes .= strpos( $css_class, 'updated' ) !== false ? ' notice-success' : '';
 		} else {
-			$classes = 'notice ' . $class;
+			$classes = 'notice ' . $css_class;
 		}
 
 		?>

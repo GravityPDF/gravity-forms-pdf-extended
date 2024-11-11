@@ -25,7 +25,7 @@ class LocalFile extends File {
 	 *
 	 * @since 6.4
 	 */
-	public function isValid() : bool {
+	public function isValid(): bool {
 		foreach ( $this->objects as $fileInfo ) {
 			$this->applyCallback( 'beforeValidationCallback', $fileInfo );
 			foreach ( $this->validations as $validation ) {

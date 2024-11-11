@@ -409,7 +409,7 @@ class Helper_Field_Container {
 	 * @since 4.0
 	 */
 	protected function increment_row_counter() {
-		$this->counter++;
+		++$this->counter;
 	}
 
 	/**

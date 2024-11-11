@@ -135,13 +135,13 @@ class PDFRender extends GFPDF_Deprecated_Abstract {
 		$path = apply_filters( 'gfpdf_legacy_save_path', PDF_SAVE_LOCATION . $id . '/', $filename, $id );
 		if ( ! is_dir( $path ) ) {
 			if ( ! wp_mkdir_p( $path ) ) {
-				throw new Exception( sprintf( 'Could not create directory: %s' ), esc_html( $path ) );
+				throw new Exception( sprintf( 'Could not create directory: %s', esc_html( $path ) ) );
 			}
 		}
 
 		/* save our PDF */
 		if ( ! file_put_contents( $path . $filename, $raw_pdf_string ) ) {
-			throw new Exception( sprintf( 'Could not save PDF: %s', $path . $filename ) );
+			throw new Exception( sprintf( 'Could not save PDF: %s', esc_html( $path . $filename ) ) );
 		}
 
 		/* return the path to the PDF */
@@ -190,7 +190,7 @@ class PDF_Common extends GFPDF_Deprecated_Abstract {
 	public static function get_ids() {
 		global $form_id, $lead_id, $lead_ids;
 
-		$form_id  = (int) $form_id ?: (int) rgget( 'fid' );
+		$form_id  = ! empty( (int) $form_id ) ? (int) $form_id : (int) rgget( 'fid' );
 		$lead_ids = ( $lead_id ) ? [ (int) $lead_id ] : array_filter( array_map( 'intval', explode( ',', rgget( 'lid' ) ) ) );
 
 		/* If form ID and lead ID hasn't been set stop the PDF from attempting to generate */
@@ -217,7 +217,7 @@ class PDF_Common extends GFPDF_Deprecated_Abstract {
 	/**
 	 * Convert merge tags to real Gravity Form values
 	 *
-	 * @param string  $string
+	 * @param string  $text
 	 * @param integer $form_id
 	 * @param integer $lead_id
 	 *
@@ -225,10 +225,10 @@ class PDF_Common extends GFPDF_Deprecated_Abstract {
 	 *
 	 * @since 3.0
 	 */
-	public static function do_mergetags( $string, $form_id, $lead_id ) {
+	public static function do_mergetags( $text, $form_id, $lead_id ) {
 		$gform = GPDFAPI::get_form_class();
 
-		return $gform->process_tags( $string, $gform->get_form( $form_id ), $gform->get_entry( $lead_id ) );
+		return $gform->process_tags( $text, $gform->get_form( $form_id ), $gform->get_entry( $lead_id ) );
 	}
 
 	/**
@@ -334,18 +334,18 @@ class GFPDFEntryDetail extends GFPDF_Deprecated_Abstract {
 	 * @param boolean $allow_display_empty_fields
 	 * @param boolean $show_html
 	 * @param boolean $show_page_name
-	 * @param boolean $return
+	 * @param boolean $should_return
 	 *
 	 * @return string  If $return is `true` the generated HTML will be returned
 	 *
 	 * @throws Exception
 	 * @since 3.0
 	 */
-	public static function lead_detail_grid( $form, $lead, $allow_display_empty_fields = false, $show_html = false, $show_page_name = false, $return = false ) {
+	public static function lead_detail_grid( $form, $lead, $allow_display_empty_fields = false, $show_html = false, $show_page_name = false, $should_return = false ) {
 		$config = [
 			'meta' => [
 				'empty_field' => $allow_display_empty_fields,
-				'return'      => $return,
+				'return'      => $should_return,
 				'html_field'  => $show_html,
 				'page_names'  => $show_page_name,
 			],
@@ -440,7 +440,7 @@ class GFPDFEntryDetail extends GFPDF_Deprecated_Abstract {
 						class="default entry-view-page-break"><?php echo esc_attr( $form['pagination']['pages'][ $page_number ] ); ?></h2>
 					<?php
 				}
-				$page_number++;
+				++$page_number;
 			}
 
 			/* Output each field type */
@@ -539,28 +539,28 @@ class GFPDFEntryDetail extends GFPDF_Deprecated_Abstract {
 	/**
 	 * Replace some of our Gravity PDF fields with legacy versions to match the old HTML structure
 	 *
-	 * @param object $class The original Gravity PDF field class being processed
-	 * @param object $field The Gravity Form field object being processed
-	 * @param array  $entry The current Gravity Form array of entry data
+	 * @param object $class_object The original Gravity PDF field class being processed
+	 * @param object $field        The Gravity Form field object being processed
+	 * @param array  $entry        The current Gravity Form array of entry data
 	 *
 	 * @return object
 	 *
 	 * @throws Exception
 	 * @since 4.0
 	 */
-	public static function load_legacy_html_classes( $class, $field, $entry ) {
+	public static function load_legacy_html_classes( $class_object, $field, $entry ) {
 
 		switch ( get_class( $field ) ) {
 			case 'GF_Field_Section':
-				$class = new GFPDF\Helper\Fields\Field_V3_Section( $field, $entry, GPDFAPI::get_form_class(), GPDFAPI::get_misc_class() );
+				$class_object = new GFPDF\Helper\Fields\Field_V3_Section( $field, $entry, GPDFAPI::get_form_class(), GPDFAPI::get_misc_class() );
 				break;
 
 			case 'GF_Field_List':
-				$class = new GFPDF\Helper\Fields\Field_V3_List( $field, $entry, GPDFAPI::get_form_class(), GPDFAPI::get_misc_class() );
+				$class_object = new GFPDF\Helper\Fields\Field_V3_List( $field, $entry, GPDFAPI::get_form_class(), GPDFAPI::get_misc_class() );
 				break;
 		}
 
-		return $class;
+		return $class_object;
 	}
 
 	/**
@@ -600,7 +600,7 @@ class GFPDFEntryDetail extends GFPDF_Deprecated_Abstract {
 
 		$field->cssClass .= ' gfpdf-field-processed';
 
-		$counter++;
+		++$counter;
 	}
 
 	/**

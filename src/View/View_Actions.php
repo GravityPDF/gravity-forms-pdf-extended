@@ -52,7 +52,6 @@ class View_Actions extends Helper_Abstract_View {
 			],
 			false
 		);
-
 	}
 
 	/**

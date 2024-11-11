@@ -138,13 +138,13 @@ abstract class Helper_Abstract_Form {
 	/**
 	 * Replace all the tag fields (that represent the field data) in the string
 	 *
-	 * @param string $string The string to process
-	 * @param array  $form   The Gravity Form array
-	 * @param array  $entry  The Gravity Form Entry Array
+	 * @param string $text  The string to process
+	 * @param array  $form  The Gravity Form array
+	 * @param array  $entry The Gravity Form Entry Array
 	 *
 	 * @return string
 	 *
 	 * @since 4.0
 	 */
-	abstract public function process_tags( $string, $form, $entry );
+	abstract public function process_tags( $text, $form, $entry );
 }

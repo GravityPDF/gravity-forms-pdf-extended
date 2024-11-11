@@ -133,7 +133,7 @@ class Controller_PDF extends Helper_Abstract_Controller implements Helper_Interf
 		add_action( 'gfpdf_post_pdf_generation', [ $this->model, 'trigger_post_save_pdf' ], 10, 4 );
 
 		/* Clean-up actions */
-		$maybe_cleanup_after_form_submission = function( $entry, $form ) {
+		$maybe_cleanup_after_form_submission = function ( $entry, $form ) {
 			$options = \GPDFAPI::get_options_class();
 			/* Exit if background processing is enabled */
 			if ( $options->get_option( 'background_processing', 'No' ) === 'Yes' ) {
@@ -235,7 +235,7 @@ class Controller_PDF extends Helper_Abstract_Controller implements Helper_Interf
 		add_filter( 'gfpdf_legacy_pre_view_or_download_pdf', [ $this, 'sgoptimizer_html_minification_fix' ] );
 		add_filter(
 			'gfpdf_pre_pdf_generation_output',
-			function() {
+			function () {
 				add_filter( 'weglot_active_translation', '__return_false' );
 			}
 		);

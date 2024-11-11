@@ -89,7 +89,7 @@ class Helper_Data {
 			return $this->data[ $name ];
 		}
 
-		throw new \Exception( 'Could not find stored Gravity PDF data with matching name: ' . $name );
+		throw new \Exception( 'Could not find stored Gravity PDF data with matching name: ' . esc_html( $name ) );
 	}
 
 	/**
@@ -158,12 +158,12 @@ class Helper_Data {
 	/**
 	 * Gravity PDF add-ons should register their details with this method so we can handle the licensing centrally
 	 *
-	 * @param Helper_Abstract_Addon $class The plugin bootstrap class
+	 * @param Helper_Abstract_Addon $addon_class The plugin bootstrap class
 	 *
 	 * @since 4.2
 	 */
-	public function add_addon( Helper_Abstract_Addon $class ) {
-		$this->addon[ $class->get_slug() ] = $class;
+	public function add_addon( Helper_Abstract_Addon $addon_class ) {
+		$this->addon[ $addon_class->get_slug() ] = $addon_class;
 	}
 
 	/**

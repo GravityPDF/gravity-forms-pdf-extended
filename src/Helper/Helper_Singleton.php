@@ -38,14 +38,14 @@ class Helper_Singleton {
 	/**
 	 * Get the class name without the namespace
 	 *
-	 * @param object $class
+	 * @param object $class_object
 	 *
 	 * @return string
 	 *
 	 * @since 4.0
 	 */
-	private function get_class_name( $class ) {
-		$class_name = get_class( $class );
+	private function get_class_name( $class_object ) {
+		$class_name = get_class( $class_object );
 		$pos        = strrpos( $class_name, '\\' );
 
 		if ( $pos !== false ) {
@@ -58,14 +58,14 @@ class Helper_Singleton {
 	/**
 	 * Add the already-initialised class to our singleton data store for later use
 	 *
-	 * @param object $class
+	 * @param object $class_object
 	 *
 	 * @since 4.0
 	 */
-	public function add_class( $class ) {
-		$class_name = $this->get_class_name( $class );
+	public function add_class( $class_object ) {
+		$class_name = $this->get_class_name( $class_object );
 
-		$this->classes[ $class_name ] = $class;
+		$this->classes[ $class_name ] = $class_object;
 	}
 
 	/**

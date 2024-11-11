@@ -142,5 +142,4 @@ class View_System_Report extends Helper_Abstract_View {
 
 		return $this->markup_warning . ' <a href="' . $learn_more_url . '">' . esc_html__( 'Learn how to update', 'gravity-pdf' ) . '</a>';
 	}
-
 }

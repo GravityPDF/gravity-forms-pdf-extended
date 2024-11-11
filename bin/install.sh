@@ -10,7 +10,6 @@ if [[ -f ".env" ]]; then
 fi
 
 # Install Gravity PDF Dependencies
-rm composer.lock
 composer install
 composer run prefix
 

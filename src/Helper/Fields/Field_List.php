@@ -185,27 +185,27 @@ class Field_List extends Helper_Abstract_Fields {
 	/**
 	 * Remove empty list rows
 	 *
-	 * @param array $list The current list array
+	 * @param array $list_array The current list array
 	 *
 	 * @return array       The filtered list array
 	 *
 	 * @since 4.0
 	 */
-	private function remove_empty_list_rows( $list ) {
+	private function remove_empty_list_rows( $list_array ) {
 
 		/* if list field empty return early */
-		if ( ! is_array( $list ) || count( $list ) === 0 ) {
-			return $list;
+		if ( ! is_array( $list_array ) || count( $list_array ) === 0 ) {
+			return $list_array;
 		}
 
 		/* If single list field */
-		if ( ! is_array( $list[0] ) ) {
-			$list = array_filter( $list );
-			$list = array_map( 'esc_html', $list );
+		if ( ! is_array( $list_array[0] ) ) {
+			$list_array = array_filter( $list_array );
+			$list_array = array_map( 'esc_html', $list_array );
 		} else {
 
 			/* Loop through the multi-column list */
-			foreach ( $list as $id => &$row ) {
+			foreach ( $list_array as $id => &$row ) {
 
 				$empty = true;
 
@@ -220,11 +220,11 @@ class Field_List extends Helper_Abstract_Fields {
 
 				/* Remove row from list */
 				if ( $empty ) {
-					unset( $list[ $id ] );
+					unset( $list_array[ $id ] );
 				}
 			}
 		}
 
-		return $list;
+		return $list_array;
 	}
 }

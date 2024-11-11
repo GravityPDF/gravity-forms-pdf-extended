@@ -240,7 +240,7 @@ class View_Settings extends Helper_Abstract_View {
 				'width'         => 'full',
 				'title'         => __( 'Default PDF Options', 'gravity-pdf' ),
 				'desc'          => __( 'Control the default settings to use when you create new PDFs on your forms.', 'gravity-pdf' ),
-				'callback'      => static function() use ( $markup ) {
+				'callback'      => static function () use ( $markup ) {
 					$markup->output_settings_fields( 'gfpdf_settings_general_defaults', $markup::ENABLE_PANEL_TITLE );
 				},
 				'content_class' => 'gform_settings_form',
@@ -264,7 +264,7 @@ class View_Settings extends Helper_Abstract_View {
 			'width'         => 'full',
 			'collapsible'   => true,
 			'title'         => __( 'Security', 'gravity-pdf' ),
-			'callback'      => static function() use ( $markup ) {
+			'callback'      => static function () use ( $markup ) {
 				$markup->output_settings_fields( 'gfpdf_settings_general_security', $markup::ENABLE_PANEL_TITLE );
 			},
 			'content_class' => 'gform_settings_form',
@@ -272,7 +272,7 @@ class View_Settings extends Helper_Abstract_View {
 
 		$vars = [
 			'edit_cap' => $this->gform->has_capability( 'gravityforms_edit_settings' ),
-			'callback' => static function() use ( $markup, $sections ) {
+			'callback' => static function () use ( $markup, $sections ) {
 				$markup->do_settings_sections( $sections, true );
 			},
 		];
@@ -297,7 +297,7 @@ class View_Settings extends Helper_Abstract_View {
 				'id'       => 'gfpdf_settings_general_view',
 				'width'    => 'full',
 				'title'    => __( 'Licensing', 'gravity-pdf' ),
-				'callback' => function() {
+				'callback' => function () {
 					$this->load( 'licence-info', [] );
 				},
 			],
@@ -313,13 +313,13 @@ class View_Settings extends Helper_Abstract_View {
 					'width'    => 'half',
 					'title'    => $field['title'],
 					'callback' => [
-						static function() use ( $markup, $field ) {
+						static function () use ( $markup, $field ) {
 							$markup->get_field_content( $field, $markup::DISABLE_PANEL_TITLE, true );
 						},
 					],
 				];
 			} else {
-				$args['callback'][] = static function() use ( $markup, $field ) {
+				$args['callback'][] = static function () use ( $markup, $field ) {
 					$markup->get_field_content( $field, $markup::DISABLE_PANEL_TITLE, true );
 				};
 			}
@@ -329,12 +329,12 @@ class View_Settings extends Helper_Abstract_View {
 				$args       = [];
 			}
 
-			$i++;
+			++$i;
 		}
 
 		$vars = [
 			'edit_cap' => $this->gform->has_capability( 'gravityforms_edit_settings' ),
-			'callback' => static function() use ( $markup, $sections ) {
+			'callback' => static function () use ( $markup, $sections ) {
 				$markup->do_settings_sections( $sections, true );
 			},
 		];
@@ -366,10 +366,10 @@ class View_Settings extends Helper_Abstract_View {
 				'id'               => $id,
 				'width'            => 'full',
 				'title'            => $addon->get_name(),
-				'callback'         => static function() use ( $markup, $id ) {
+				'callback'         => static function () use ( $markup, $id ) {
 					$fields = array_filter(
 						(array) $markup->get_section_fields( 'gfpdf_settings_extensions' ),
-						function( $field ) use ( $id ) {
+						function ( $field ) use ( $id ) {
 							return strpos( $field['args']['id'], $id ) === 0;
 						}
 					);
@@ -386,7 +386,7 @@ class View_Settings extends Helper_Abstract_View {
 
 		$vars = [
 			'edit_cap' => $this->gform->has_capability( 'gravityforms_edit_settings' ),
-			'callback' => static function() use ( $markup, $sections ) {
+			'callback' => static function () use ( $markup, $sections ) {
 				$markup->do_settings_sections( $sections, true );
 			},
 		];
@@ -435,7 +435,7 @@ class View_Settings extends Helper_Abstract_View {
 			'template_directory'            => $this->misc->relative_path( $template_directory, '/' ),
 			'template_files'                => $this->templates->get_core_pdf_templates(),
 			'custom_template_setup_warning' => $this->options->get_option( 'custom_pdf_template_files_installed' ),
-			'callback'                      => static function() use ( $markup, $sections ) {
+			'callback'                      => static function () use ( $markup, $sections ) {
 				$markup->do_settings_sections( $sections, true );
 			},
 		];
