@@ -28,8 +28,11 @@
 	<!-- Show sniff codes in all reports -->
 	<arg value="ps"/>
 
-	<!-- For now, only the files in src are scanned. -->
+	<!-- For now, only the files in src and key top-level files are scanned -->
 	<file>./src/</file>
+	<file>./pdf.php</file>
+	<file>./api.php</file>
+	<file>./gravity-pdf-updater.php</file>
 
 	<!-- Code which doesn't go into production may have different requirements. -->
 	<exclude-pattern>/.php-scoper/*</exclude-pattern>
