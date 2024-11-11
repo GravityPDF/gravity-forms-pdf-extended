@@ -192,7 +192,7 @@ class Model_System_Report extends Helper_Abstract_Model {
 
 			'internal_encoding' => [
 				'label' => esc_html__( 'Internal Encoding', 'gravity-pdf' ),
-				'value' => ini_get( 'internal_encoding' ) ?: ini_get( 'default_charset' ),
+				'value' => ini_get( 'internal_encoding' ) ?: ini_get( 'default_charset' ), //phpcs:ignore Universal.Operators.DisallowShortTernary.Found
 			],
 		];
 
@@ -366,7 +366,7 @@ class Model_System_Report extends Helper_Abstract_Model {
 				if ( ! is_wp_error( $response ) ) {
 
 					/*
-					 * Check if the web server responded with a OK status code.
+					 * Check if the web server responded with an OK status code.
 					 * If we can read the contents of the file, then mark as failed
 					 */
 					if (
@@ -392,8 +392,7 @@ class Model_System_Report extends Helper_Abstract_Model {
 				}
 			}
 
-			/* phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged */
-			@unlink( $tmp_dir . $tmp_test_file );
+			@unlink( $tmp_dir . $tmp_test_file ); /* phpcs:ignore */
 		}
 
 		return $return;

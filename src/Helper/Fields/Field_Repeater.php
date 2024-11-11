@@ -155,7 +155,7 @@ class Field_Repeater extends Helper_Abstract_Fields {
 		$i    = 0;
 		$html = preg_replace_callback(
 			'/id="(.+?)"/',
-			function( $matches ) use ( &$i ) {
+			function ( $matches ) use ( &$i ) {
 				return sprintf(
 					'id="repeater-%s-%s-%s"',
 					$this->field->id,
@@ -198,7 +198,7 @@ class Field_Repeater extends Helper_Abstract_Fields {
 
 		/* Output the Repeater Label if a sub Repeater */
 		if ( $this->maybe_show_section_title( $is_top_level, $field, $value ) ) {
-			echo sprintf( '<div class="gfpdf-section-title"><h3>%s</h3></div>', esc_html( $field->label ) );
+			printf( '<div class="gfpdf-section-title"><h3>%s</h3></div>', esc_html( $field->label ) );
 		}
 
 		/* Loop through the entry data for the current repeater */
@@ -297,7 +297,6 @@ class Field_Repeater extends Helper_Abstract_Fields {
 		$this->cache( $this->get_value() );
 
 		return $this->cache();
-
 	}
 
 	/**

@@ -260,7 +260,7 @@ class Helper_PDF_List_Table extends WP_List_Table {
 			}
 		}
 
-		echo sprintf( '<span>%1$s</span>', esc_html( implode( ', ', $notification_names ) ) );
+		printf( '<span>%1$s</span>', esc_html( implode( ', ', $notification_names ) ) );
 	}
 
 	/**
@@ -403,6 +403,5 @@ class Helper_PDF_List_Table extends WP_List_Table {
 		echo '<label>';
 		printf( esc_html__( "This form doesn't have any PDFs. Let's go %1\$screate one%2\$s.", 'gravity-pdf' ), "<a href='" . esc_url( add_query_arg( [ 'pid' => 0 ] ) ) . "'>", '</a>' );
 		echo '</label>';
-
 	}
 }

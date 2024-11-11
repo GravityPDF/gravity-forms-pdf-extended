@@ -290,18 +290,16 @@ class Model_Install extends Helper_Abstract_Model {
 
 					$this->notices->add_error( sprintf( esc_html__( 'There was a problem creating the %s directory. Ensure you have write permissions to your uploads folder.', 'gravity-pdf' ), '<code>' . $this->misc->relative_path( $dir ) . '</code>' ) );
 				}
-			} else {
+			} elseif ( ! wp_is_writable( $dir ) ) {
 				/* test the directory is currently writable by the web server, otherwise throw an error */
-				if ( ! wp_is_writable( $dir ) ) {
-					$this->log->error(
-						'Failed Write Permissions Check.',
-						[
-							'dir' => $dir,
-						]
-					);
+				$this->log->error(
+					'Failed Write Permissions Check.',
+					[
+						'dir' => $dir,
+					]
+				);
 
-					$this->notices->add_error( sprintf( esc_html__( 'Gravity PDF does not have write permission to the %s directory. Contact your web hosting provider to fix the issue.', 'gravity-pdf' ), '<code>' . $this->misc->relative_path( $dir ) . '</code>' ) );
-				}
+				$this->notices->add_error( sprintf( esc_html__( 'Gravity PDF does not have write permission to the %s directory. Contact your web hosting provider to fix the issue.', 'gravity-pdf' ), '<code>' . $this->misc->relative_path( $dir ) . '</code>' ) );
 			}
 		}
 

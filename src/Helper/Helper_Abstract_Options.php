@@ -681,22 +681,22 @@ abstract class Helper_Abstract_Options implements Helper_Interface_Filters {
 	 *
 	 * Looks to see if the specified setting exists, returns default if not
 	 *
-	 * @param string $key     The options key to get
-	 * @param bool   $default The default option value if the key isn't found
+	 * @param string $key      The options key to get
+	 * @param bool   $fallback The default option value if the key isn't found
 	 *
 	 * @return mixed
 	 * @since 4.0
 	 *
 	 */
-	public function get_option( $key = '', $default = false ) {
+	public function get_option( $key = '', $fallback = false ) {
 
 		$gfpdf_options = $this->settings;
 
-		$value = ( ! empty( $gfpdf_options[ $key ] ) ) ? $gfpdf_options[ $key ] : $default;
+		$value = ( ! empty( $gfpdf_options[ $key ] ) ) ? $gfpdf_options[ $key ] : $fallback;
 
 		/* See https://docs.gravitypdf.com/v6/developers/filters/gfpdf_get_option/ for more details about these filters */
-		$value = apply_filters( 'gfpdf_get_option', $value, $key, $default );
-		$value = apply_filters( 'gfpdf_get_option_' . $key, $value, $key, $default );
+		$value = apply_filters( 'gfpdf_get_option', $value, $key, $fallback );
+		$value = apply_filters( 'gfpdf_get_option_' . $key, $value, $key, $fallback );
 
 		return $value;
 	}
@@ -1996,16 +1996,16 @@ abstract class Helper_Abstract_Options implements Helper_Interface_Filters {
 	/**
 	 * Build our option groups for the select box
 	 *
-	 * @param array        $options The list of options that should be displayed
-	 * @param array|string $value   The selected option
-	 * @param bool         $echo    To output or echo the content
+	 * @param array        $options       The list of options that should be displayed
+	 * @param array|string $value         The selected option
+	 * @param bool         $should_output To output or echo the content
 	 *
 	 * @return string|void
 	 *
 	 * @since 4.1
 	 */
-	public function build_options_for_select( $options, $value, $echo = false ) {
-		if ( ! $echo ) {
+	public function build_options_for_select( $options, $value, $should_output = false ) {
+		if ( ! $should_output ) {
 			ob_start();
 		}
 
@@ -2045,7 +2045,7 @@ abstract class Helper_Abstract_Options implements Helper_Interface_Filters {
 			}
 		}
 
-		if ( ! $echo ) {
+		if ( ! $should_output ) {
 			ob_get_clean();
 		}
 	}

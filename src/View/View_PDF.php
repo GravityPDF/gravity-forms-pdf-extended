@@ -257,7 +257,7 @@ class View_PDF extends Helper_Abstract_View {
 		if ( function_exists( 'wpel_init' ) ) {
 			add_filter(
 				'wpel_apply_settings',
-				function() {
+				function () {
 					return false;
 				}
 			);

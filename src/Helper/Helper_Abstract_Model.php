@@ -32,12 +32,12 @@ abstract class Helper_Abstract_Model {
 	/**
 	 * Add a controller setter function with type hinting to ensure compatibility
 	 *
-	 * @param Helper_Abstract_Controller $class The controller class
+	 * @param Helper_Abstract_Controller $controller_class The controller class
 	 *
 	 * @since 4.0
 	 */
-	final public function setController( Helper_Abstract_Controller $class ) {
-		$this->controller = $class;
+	final public function setController( Helper_Abstract_Controller $controller_class ) {
+		$this->controller = $controller_class;
 	}
 
 	/**

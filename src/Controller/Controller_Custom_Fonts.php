@@ -436,7 +436,7 @@ class Controller_Custom_Fonts extends Helper_Abstract_Controller {
 	protected function get_uploaded_font_files( WP_REST_Request $request ): array {
 		return array_filter(
 			$request->get_file_params(),
-			function( $id ) {
+			function ( $id ) {
 				return in_array( $id, $this->font_keys, true );
 			},
 			ARRAY_FILTER_USE_KEY
@@ -495,7 +495,10 @@ class Controller_Custom_Fonts extends Helper_Abstract_Controller {
 	 * @since 6.0
 	 */
 	protected function delete_font_file( string $file ): bool {
-		if ( is_file( $this->font_dir_path . $file ) && ! unlink( $this->font_dir_path . $file ) ) {
+		if (
+			is_file( $this->font_dir_path . $file ) &&
+			! @unlink( $this->font_dir_path . $file ) /* phpcs:ignore */
+		) {
 			return false;
 		}
 

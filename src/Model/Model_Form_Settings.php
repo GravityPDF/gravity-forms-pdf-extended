@@ -646,24 +646,24 @@ class Model_Form_Settings extends Helper_Abstract_Model {
 	/**
 	 * Load our custom appearance settings (if needed)
 	 *
-	 * @param object $class    The template configuration class
-	 * @param array  $settings Any current settings
+	 * @param object $config_class The template configuration class
+	 * @param array  $settings     Any current settings
 	 *
 	 * @return array
 	 *
 	 * @since 4.0
 	 */
-	public function setup_custom_appearance_settings( $class, $settings = [] ) {
+	public function setup_custom_appearance_settings( $config_class, $settings = [] ) {
 
 		/* If class isn't an instance of our interface return $settings */
-		if ( ! ( $class instanceof Helper_Interface_Config ) ) {
+		if ( ! ( $config_class instanceof Helper_Interface_Config ) ) {
 			return $settings;
 		}
 
 		/**
 		 * Now we have the class initialised, let's load our configuration array
 		 */
-		$template_settings = $class->configuration();
+		$template_settings = $config_class->configuration();
 
 		/* register any custom fields */
 		if ( isset( $template_settings['fields'] ) && is_array( $template_settings['fields'] ) ) {
@@ -672,7 +672,7 @@ class Model_Form_Settings extends Helper_Abstract_Model {
 			}
 		}
 
-		$settings = $this->setup_core_custom_appearance_settings( $settings, $class, $template_settings );
+		$settings = $this->setup_core_custom_appearance_settings( $settings, $config_class, $template_settings );
 
 		return $settings;
 	}
@@ -681,14 +681,14 @@ class Model_Form_Settings extends Helper_Abstract_Model {
 	 * Setup any core fields that are registered to the PDF template
 	 *
 	 * @param array                   $settings          Any current settings
-	 * @param Helper_Interface_Config $class             The template configuration class
+	 * @param Helper_Interface_Config $config_class      The template configuration class
 	 * @param array                   $template_settings Loaded configuration array
 	 *
 	 * @return array
 	 *
 	 * @since 4.0
 	 */
-	public function setup_core_custom_appearance_settings( array $settings, Helper_Interface_Config $class, array $template_settings ) {
+	public function setup_core_custom_appearance_settings( array $settings, Helper_Interface_Config $config_class, array $template_settings ) {
 
 		/* register our core fields */
 		$core_fields = [
@@ -708,7 +708,7 @@ class Model_Form_Settings extends Helper_Abstract_Model {
 		];
 
 		/* See https://docs.gravitypdf.com/v6/developers/filters/gfpdf_core_template_fields_list/ for more details about this filter */
-		$core_fields = apply_filters( 'gfpdf_core_template_fields_list', $core_fields, $template_settings, $class );
+		$core_fields = apply_filters( 'gfpdf_core_template_fields_list', $core_fields, $template_settings, $config_class );
 
 		foreach ( $core_fields as $id => $method ) {
 
@@ -981,7 +981,7 @@ class Model_Form_Settings extends Helper_Abstract_Model {
 			/* add our filter to override what template gets rendered (by default it is the current selected template in the config) */
 			add_filter(
 				'gfpdf_form_settings_custom_appearance',
-				function() use ( &$settings ) {
+				function () use ( &$settings ) {
 					/* check if the template has any configuration */
 					return $settings;
 				},

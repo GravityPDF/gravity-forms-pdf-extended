@@ -48,5 +48,4 @@ class Field_V3_Section extends Field_Section {
 
 		return $html;
 	}
-
 }

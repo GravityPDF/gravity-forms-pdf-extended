@@ -45,7 +45,7 @@ class Field_Survey extends Helper_Abstract_Fields_Input_Type {
 				/* Overriding survey radio values with name */
 				array_walk(
 					$data['field'],
-					function( &$item, $key, $value ) {
+					function ( &$item, $key, $value ) {
 						$item = esc_html( $value );
 					},
 					$value

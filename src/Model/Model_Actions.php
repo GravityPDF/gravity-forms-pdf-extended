@@ -140,5 +140,4 @@ class Model_Actions extends Helper_Abstract_Model {
 		wp_safe_redirect( admin_url( 'admin.php?page=gf_settings&subview=PDF&tab=tools#/downloadCoreFonts' ) );
 		exit;
 	}
-
 }

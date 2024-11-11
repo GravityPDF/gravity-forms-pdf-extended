@@ -103,7 +103,6 @@ class Helper_Field_Container_Gf25 extends Helper_Field_Container {
 	 * @param GF_Field $field The Gravity Form field currently being processed
 	 */
 	public function maybe_display_faux_column( GF_Field $field ) {
-
 	}
 
 	/**

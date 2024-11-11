@@ -116,7 +116,7 @@ class Field_Multiselect extends Helper_Abstract_Fields {
 				$option = $value ? $item['value'] : $item['label'];
 
 				$html .= '<li id="' . esc_attr( 'field-' . $this->field->id . '-option-' . $i ) . '">' . Kses::parse( $option ) . '</li>';
-				$i++;
+				++$i;
 			}
 
 			$html .= '</ul>';

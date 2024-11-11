@@ -143,7 +143,7 @@ class Controller_Save_Core_Fonts extends Helper_Abstract_Controller implements H
 		/* Look for a file in the font list with a matching name */
 		$matching_fonts = array_filter(
 			$core_font_list,
-			function( $item ) {
+			function ( $item ) {
 				/* phpcs:ignore WordPress.Security.NonceVerification.Missing */
 				return $item['name'] === ( $_POST['font_name'] ?? '' );
 			}

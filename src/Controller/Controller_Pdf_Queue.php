@@ -170,7 +170,7 @@ class Controller_Pdf_Queue extends Helper_Abstract_Controller {
 	/**
 	 * Determine if a PDF should be included as an email attachment in the current notification
 	 *
-	 * @param bool  $default
+	 * @param bool  $is_disabled
 	 * @param array $notification
 	 * @param array $form
 	 * @param array $entry
@@ -179,7 +179,7 @@ class Controller_Pdf_Queue extends Helper_Abstract_Controller {
 	 *
 	 * @since 5.0
 	 */
-	public function do_we_disable_notification( $default, $notification, $form, $entry ) {
+	public function do_we_disable_notification( $is_disabled, $notification, $form, $entry ) {
 		$pdfs = $this->model_pdf->get_active_pdfs( $form['gfpdf_form_settings'] ?? [], $entry );
 
 		/* Disable notification if PDF needs to be attached to it */
@@ -197,7 +197,7 @@ class Controller_Pdf_Queue extends Helper_Abstract_Controller {
 			}
 		}
 
-		return $default;
+		return $is_disabled;
 	}
 
 	/**

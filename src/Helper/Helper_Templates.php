@@ -134,7 +134,7 @@ class Helper_Templates {
 			$matched_templates_basename_list = array_merge(
 				$matched_templates_basename_list,
 				array_map(
-					function( $file ) {
+					function ( $file ) {
 						return basename( $file, '.php' );
 					},
 					$unique_templates
@@ -266,7 +266,7 @@ class Helper_Templates {
 	 */
 	public function get_all_template_info() {
 		return array_map(
-			function( $template_path ) {
+			function ( $template_path ) {
 				return $this->get_template_info_by_path( $template_path );
 			},
 			$this->get_all_templates()
@@ -310,7 +310,7 @@ class Helper_Templates {
 			return $fallback_template;
 		}
 
-		throw new Exception( sprintf( 'Could not find the template: %s.php', $template_id ) );
+		throw new Exception( sprintf( 'Could not find the template: %s.php', esc_html( $template_id ) ) );
 	}
 
 	/**
@@ -518,7 +518,7 @@ class Helper_Templates {
 			}
 		}
 
-		throw new Exception( sprintf( 'No optional configuration file exists for %s.php', $template_id ) );
+		throw new Exception( sprintf( 'No optional configuration file exists for %s.php', esc_html( $template_id ) ) );
 	}
 
 	/**
@@ -614,7 +614,7 @@ class Helper_Templates {
 			return new $fqcn();
 		}
 
-		throw new Exception( 'Template configuration failed to load: ' . $fqcn );
+		throw new Exception( 'Template configuration failed to load: ' . esc_html( $fqcn ) );
 	}
 
 	/**
@@ -636,7 +636,7 @@ class Helper_Templates {
 		$file_array = explode( '_', $file );
 		array_walk(
 			$file_array,
-			function( &$item ) {
+			function ( &$item ) {
 				$item = mb_convert_case( $item, MB_CASE_TITLE, 'UTF-8' );
 			}
 		);

@@ -19,7 +19,6 @@ vendor_prefixed/*
 
 ### Packages ###
 node_modules/*
-composer.lock
 
 ### PhpStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm

@@ -24,7 +24,7 @@ if ( ! class_exists( '\GFPDF\Helper\Licensing\EDD_SL_Plugin_Updater' ) ) {
  */
 add_action(
 	'init',
-	function() {
+	function () {
 		new EDD_SL_Plugin_Updater(
 			GPDF_API_URL,
 			GPDF_PLUGIN_FILE,
@@ -44,7 +44,7 @@ add_action(
  */
 add_action(
 	'http_api_debug',
-	function( $response, $context, $class, $parsed_args, $url ) {
+	function ( $response, $context, $class_object, $parsed_args, $url ) {
 		/* Log only Gravity PDF requests */
 		if ( $url !== GPDF_API_URL ) {
 			return;
@@ -100,7 +100,7 @@ add_action(
  */
 add_action(
 	'admin_init',
-	function() {
+	function () {
 		if ( ! method_exists( '\GFCommon', 'remove_dismissible_message' ) ) {
 			return;
 		}
@@ -114,7 +114,7 @@ add_action(
  */
 add_action(
 	'after_plugin_row',
-	function( $plugin_file, $plugin_data ) {
+	function ( $plugin_file, $plugin_data ) {
 		if ( ! isset( $plugin_data['TextDomain'] ) || $plugin_data['TextDomain'] !== 'gravity-forms-pdf-extended' ) {
 			return;
 		}

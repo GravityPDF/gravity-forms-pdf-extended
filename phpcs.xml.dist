@@ -35,16 +35,17 @@
         <exclude name="WordPress.PHP.YodaConditions"/>
         <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseParenthesis"/>
         <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterKeyword"/>
-        <exclude name="WordPress.WhiteSpace.PrecisionAlignment"/>
+        <exclude name="Universal.WhiteSpace.PrecisionAlignment"/>
         <exclude name="WordPress.NamingConventions.ValidVariableName"/>
         <exclude name="WordPress.NamingConventions.ValidFunctionName"/>
-        <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
-        <exclude name="WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents"/>
-        <exclude name="WordPress.WP.AlternativeFunctions.file_system_read_fopen"/>
-        <exclude name="WordPress.WP.AlternativeFunctions.file_system_read_fread"/>
-        <exclude name="WordPress.WP.AlternativeFunctions.file_system_read_fclose"/>
-        <exclude name="WordPress.PHP.DisallowShortTernary.Found"/>
+        <exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"/>
+        <exclude name="WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents"/>
+        <exclude name="WordPress.WP.AlternativeFunctions.file_system_operations_fopen"/>
+        <exclude name="WordPress.WP.AlternativeFunctions.file_system_operations_fread"/>
+        <exclude name="WordPress.WP.AlternativeFunctions.file_system_operations_fclose"/>
         <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCatch"/>
+        <exclude name="PSR12.Files.FileHeader.IncorrectOrder"/>
+        <exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed"/>
 
         <exclude-pattern>/tests/*</exclude-pattern>
     </rule>
@@ -55,11 +56,7 @@
         <exclude-pattern>/api.php</exclude-pattern>
         <exclude-pattern>/src/deprecated.php</exclude-pattern>
         <exclude-pattern>/src/controller/Controller_Activation.php</exclude-pattern>
-         <exclude-pattern>/tests/*</exclude-pattern>
-    </rule>
-
-    <rule ref="Generic.PHP.DisallowShortOpenTag.EchoFound">
-        <severity>0</severity>
+        <exclude-pattern>/tests/*</exclude-pattern>
     </rule>
 
     <rule ref="Generic.Files.ByteOrderMark"/>
@@ -73,7 +70,7 @@
 
     <rule ref="WordPress.WP.DeprecatedFunctions">
         <properties>
-            <property name="minimum_supported_version" value="4.8"/>
+            <property name="minimum_wp_version" value="4.8"/>
         </properties>
     </rule>
 
@@ -85,7 +82,6 @@
 
     <rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
         <properties>
-            <property name="spaces_before_closure_open_paren" value="0"/>
             <property name="space_before_colon" value="forbidden"/>
         </properties>
     </rule>
