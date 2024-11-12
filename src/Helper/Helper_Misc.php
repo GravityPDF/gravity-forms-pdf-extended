@@ -445,8 +445,7 @@ class Helper_Misc {
 
 			foreach ( $files as $fileinfo ) {
 				if ( $fileinfo->isDir() && ! file_exists( $destination . $files->getSubPathName() ) ) {
-					/* phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged */
-					if ( wp_mkdir_p( $destination . $files->getSubPathName() ) ) {
+					if ( ! wp_mkdir_p( $destination . $files->getSubPathName() ) ) {
 						$this->log->error(
 							'Failed Creating Folder',
 							[
