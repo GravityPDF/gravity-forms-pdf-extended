@@ -5,7 +5,7 @@ Donate link: https://gravitypdf.com/donate-to-plugin/
 Tags: gravity forms, form, contact form, pdf, email
 Requires at least: 5.3
 Tested up to: 6.7
-Stable tag: 6.12.3
+Stable tag: 6.12.4
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.txt
@@ -107,6 +107,12 @@ Gravity PDF can be run on most modern shared web hosting without any issues. It 
 16. A bunch of paid PDF designs are available, as well as additional functionality.
 
 == Changelog ==
+
+= 6.12.4 =
+* Bug: Improve PDF column support when Gravity Forms includes a spacer
+* Bug: Fix display of Website field when it isn't filled in and *Show Empty Fields* is enabled
+* Housekeeping: Mark as compatible with WP 6.7
+* Housekeeping: Update PHP dependencies
 
 = 6.12.3 =
 * Bug: Resolve PHP error when a license has not been activated for a Gravity PDF extension
