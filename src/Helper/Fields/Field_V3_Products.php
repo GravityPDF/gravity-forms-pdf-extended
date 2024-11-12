@@ -68,5 +68,4 @@ class Field_V3_Products extends Field_Products {
 
 		return Kses::parse( $html );
 	}
-
 }

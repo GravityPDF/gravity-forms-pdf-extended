@@ -1035,4 +1035,3 @@ class Router implements Helper\Helper_Interface_Actions, Helper\Helper_Interface
  * our AJAX calls in our unit testing suite failing (boo)
  */
 add_action( 'after_setup_theme', '\GFPDF\Router::initialise_plugin' );
-

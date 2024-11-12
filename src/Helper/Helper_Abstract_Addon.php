@@ -309,19 +309,19 @@ abstract class Helper_Abstract_Addon {
 		 */
 		array_walk(
 			$classes,
-			function( $class ) {
+			function ( $class_object ) {
 
 				/* Inject the logger class if using the trait Helper_Trait_Logger */
-				$trait = class_uses( $class );
+				$trait = class_uses( $class_object );
 				if ( isset( $trait['GFPDF\Helper\Helper_Trait_Logger'] ) ) {
-					$class->set_logger( $this->log );
+					$class_object->set_logger( $this->log );
 				}
 
-				if ( method_exists( $class, 'init' ) ) {
-					$class->init();
+				if ( method_exists( $class_object, 'init' ) ) {
+					$class_object->init();
 				}
 
-				$this->singleton->add_class( $class );
+				$this->singleton->add_class( $class_object );
 			}
 		);
 	}
@@ -463,7 +463,7 @@ abstract class Helper_Abstract_Addon {
 		$ids = array_keys( $this->get_global_addon_fields() );
 		if ( $include_prefix ) {
 			$ids = array_map(
-				function( $id ) {
+				function ( $id ) {
 					return $this->get_addon_settings_key() . $id;
 				},
 				$ids
@@ -490,7 +490,7 @@ abstract class Helper_Abstract_Addon {
 		/* Get only settings that apply to this add-on */
 		$filters_settings = array_filter(
 			$this->options->get_settings(),
-			function( $key ) use ( $setting_ids ) {
+			function ( $key ) use ( $setting_ids ) {
 				return in_array( $key, $setting_ids, true );
 			},
 			ARRAY_FILTER_USE_KEY

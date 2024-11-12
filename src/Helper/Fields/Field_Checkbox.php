@@ -115,7 +115,7 @@ class Field_Checkbox extends Helper_Abstract_Fields {
 			foreach ( $items as $item ) {
 				$sanitized_option = $show_value ? $item['value'] : $item['label'];
 				$html            .= '<li id="' . esc_attr( 'field-' . $this->field->id . '-option-' . $i ) . '">' . $sanitized_option . '</li>';
-				$i++;
+				++$i;
 			}
 
 			$html .= '</ul>';

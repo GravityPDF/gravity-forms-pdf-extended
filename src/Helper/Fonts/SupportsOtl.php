@@ -57,4 +57,3 @@ class SupportsOtl {
 		return false;
 	}
 }
-

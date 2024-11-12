@@ -53,7 +53,7 @@ class Field_Option extends Helper_Abstract_Field_Products {
 
 		/* Get the field name ( */
 		$name = array_map(
-			function( $value ) use ( $field ) {
+			function ( $value ) use ( $field ) {
 				$option_info = GFCommon::get_option_info( $value, $field, false );
 
 				return esc_html( $option_info['name'] );
@@ -63,7 +63,7 @@ class Field_Option extends Helper_Abstract_Field_Products {
 
 		/* Get the field value (the price) */
 		$price = array_map(
-			function( $value ) use ( $field ) {
+			function ( $value ) use ( $field ) {
 				$option_info = GFCommon::get_option_info( $value, $field, false );
 
 				return esc_html( $option_info['price'] );
@@ -147,7 +147,7 @@ class Field_Option extends Helper_Abstract_Field_Products {
 				[
 					'options' => array_filter(
 						$data['products'][ $this->field->productField ]['options'],
-						function( $option ) {
+						function ( $option ) {
 							return ! isset( $option['id'] ) || $option['id'] === $this->field->id;
 						}
 					),

@@ -32,14 +32,14 @@ class View_GravityForm_Settings_Markup extends Helper_Abstract_View {
 
 	/**
 	 * @param array $sections
-	 * @param bool $echo
+	 * @param bool  $should_output
 	 *
 	 * @return string
 	 */
-	public function do_settings_sections( $sections, $echo = false ) {
+	public function do_settings_sections( $sections, $should_output = false ) {
 		$markup = '';
 		foreach ( $sections as $section ) {
-			$markup .= $this->fieldset( $section, $echo );
+			$markup .= $this->fieldset( $section, $should_output );
 		}
 
 		return $markup;
@@ -47,12 +47,12 @@ class View_GravityForm_Settings_Markup extends Helper_Abstract_View {
 
 	/**
 	 * @param array $args
-	 * @param bool $echo
+	 * @param bool  $should_output
 	 *
 	 * @return string
 	 */
-	public function fieldset( $args, $echo = false ) {
-		return $this->load( 'fieldset', $args, $echo );
+	public function fieldset( $args, $should_output = false ) {
+		return $this->load( 'fieldset', $args, $should_output );
 	}
 
 	/**
@@ -114,7 +114,7 @@ class View_GravityForm_Settings_Markup extends Helper_Abstract_View {
 				'width'         => $overrides[ $id ]['width'] ?? 'half',
 				'title'         => $field['title'],
 				'desc'          => $overrides[ $id ]['desc'] ?? '',
-				'callback'      => function() use ( $field ) {
+				'callback'      => function () use ( $field ) {
 					$this->get_field_content( $field, self::DISABLE_PANEL_TITLE, true );
 				},
 				'content_class' => $overrides[ $id ]['content_class'] ?? '',
@@ -129,11 +129,11 @@ class View_GravityForm_Settings_Markup extends Helper_Abstract_View {
 	/**
 	 * @param     $field
 	 * @param int $output_title
-	 * @param bool $echo
+	 * @param bool $should_output
 	 *
 	 * @return bool|string|WP_Error
 	 */
-	public function get_field_content( $field, int $output_title = self::DISABLE_PANEL_TITLE, bool $echo = false ) {
+	public function get_field_content( $field, int $output_title = self::DISABLE_PANEL_TITLE, bool $should_output = false ) {
 
 		$class = 'gform-settings-field gfpdf-settings-field-wrapper';
 
@@ -152,7 +152,7 @@ class View_GravityForm_Settings_Markup extends Helper_Abstract_View {
 			}
 		}
 
-		return $this->load( 'settings_field', $args, $echo );
+		return $this->load( 'settings_field', $args, $should_output );
 	}
 
 	/**
@@ -163,7 +163,7 @@ class View_GravityForm_Settings_Markup extends Helper_Abstract_View {
 	public function get_tooltip_markup( $html ) {
 		$name = 'gfpdf_tooltip';
 
-		$register = function( $tooltips ) use ( $name, $html ) {
+		$register = function ( $tooltips ) use ( $name, $html ) {
 			$tooltips[ $name ] = $html;
 
 			return $tooltips;

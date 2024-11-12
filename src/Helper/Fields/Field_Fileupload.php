@@ -117,7 +117,7 @@ class Field_Fileupload extends Helper_Abstract_Fields {
 				$file_info   = pathinfo( $file );
 				$secure_file = $this->field->get_download_url( $file );
 				$html       .= '<li id="' . esc_attr( 'field-' . $this->field->id . '-option-' . $i ) . '"><a href="' . esc_url( $secure_file ) . '">' . esc_html( $file_info['basename'] ) . '</a></li>';
-				$i++;
+				++$i;
 			}
 
 			$html .= '</ul>';

@@ -64,9 +64,14 @@ class Helper_Field_Container_Gf25 extends Helper_Field_Container {
 			$field->cssClass = trim( 'grid grid-' . $field->layoutGridColumnSpan . ' ' . $field->cssClass );
 		}
 
-		/* Mark as the end of this row */
+		/* Mark as the end of this row if Gravity Forms would insert a spacer */
 		if ( ! empty( $field->layoutSpacerGridColumnSpan ) ) {
-			$this->end_of_row = true;
+			$gform = \GPDFAPI::get_form_class();
+			$form  = $gform->get_form( $field->form_id );
+
+			if ( isset( $form['fields'] ) && ! empty( \GFFormDisplay::get_row_spacer( $field, $form ) ) ) {
+				$this->end_of_row = true;
+			}
 		}
 	}
 
@@ -98,7 +103,6 @@ class Helper_Field_Container_Gf25 extends Helper_Field_Container {
 	 * @param GF_Field $field The Gravity Form field currently being processed
 	 */
 	public function maybe_display_faux_column( GF_Field $field ) {
-
 	}
 
 	/**

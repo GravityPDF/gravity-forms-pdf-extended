@@ -379,5 +379,4 @@ class Model_Mergetags extends Helper_Abstract_Model {
 		$gform = \GPDFAPI::get_form_class();
 		return $this->process_field_value( $field_value, $gform->get_form( $form_id ), $entry, $field_id );
 	}
-
 }

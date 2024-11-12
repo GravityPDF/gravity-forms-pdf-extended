@@ -113,7 +113,7 @@ class Model_Templates extends Helper_Abstract_Model {
 			$this->log->warning(
 				'File validation and move failed',
 				[
-					'file'  => $_FILES,
+					'file'  => $_FILES, //phpcs:ignore WordPress.Security.NonceVerification.Missing
 					'error' => $e->getMessage(),
 				]
 			);
@@ -131,7 +131,7 @@ class Model_Templates extends Helper_Abstract_Model {
 			$this->log->warning(
 				'File validation and move failed',
 				[
-					'file'  => $_FILES,
+					'file'  => $_FILES, //phpcs:ignore WordPress.Security.NonceVerification.Missing
 					'error' => $e->getMessage(),
 				]
 			);
@@ -159,7 +159,7 @@ class Model_Templates extends Helper_Abstract_Model {
 
 		/* Fix template path */
 		$headers = array_map(
-			function( $header ) use ( $unzipped_dir_name, $template_path ) {
+			function ( $header ) use ( $unzipped_dir_name, $template_path ) {
 				$header['path'] = str_replace( $unzipped_dir_name, $template_path, $header['path'] );
 
 				return $header;
@@ -250,21 +250,17 @@ class Model_Templates extends Helper_Abstract_Model {
 	 * @since 4.1
 	 */
 	public function delete_template( $template_id ) {
-		try {
-			$files  = $this->templates->get_template_files_by_id( $template_id );
-			$config = $this->templates->get_config_class( $template_id );
+		$files  = $this->templates->get_template_files_by_id( $template_id );
+		$config = $this->templates->get_config_class( $template_id );
 
-			/* Check if the PDF config implements our Setup/TearDown interface and run the tear down */
-			if ( in_array( 'GFPDF\Helper\Helper_Interface_Setup_TearDown', class_implements( $config ), true ) ) {
-				$config->tearDown();
-			}
+		/* Check if the PDF config implements our Setup/TearDown interface and run the tear down */
+		if ( in_array( 'GFPDF\Helper\Helper_Interface_Setup_TearDown', class_implements( $config ), true ) ) {
+			$config->tearDown();
+		}
 
-			/* Remove the PDF template files */
-			foreach ( $files as $file ) {
-				unlink( $file );
-			}
-		} catch ( Exception $e ) {
-			throw $e; /* throw further down the chain */
+		/* Remove the PDF template files */
+		foreach ( $files as $file ) {
+			@unlink( $file ); //phpcs:ignore
 		}
 	}
 
@@ -357,7 +353,7 @@ class Model_Templates extends Helper_Abstract_Model {
 
 		/* If the unzip failed we'll throw an error */
 		if ( is_wp_error( $results ) ) {
-			throw new Exception( $results->get_error_message() );
+			throw new Exception( esc_html( $results->get_error_message() ) );
 		}
 
 		/* Check unzipped templates for a valid v4 header, or v3 string pattern */
@@ -385,7 +381,7 @@ class Model_Templates extends Helper_Abstract_Model {
 			$basename = wp_basename( $file );
 
 			if ( ! preg_match( '/^[a-zA-Z0-9-_]+.php$/', $basename ) ) {
-				throw new Exception( sprintf( esc_html__( 'The filename %s contains invalid characters. Only alphanumeric, hyphen, and underscore allowed.', 'gravity-pdf' ), $basename ) );
+				throw new Exception( sprintf( esc_html__( 'The filename %s contains invalid characters. Only alphanumeric, hyphen, and underscore allowed.', 'gravity-pdf' ), esc_html( $basename ) ) );
 			}
 
 			/* Check if we have a valid v4 template header in the file */
@@ -399,7 +395,7 @@ class Model_Templates extends Helper_Abstract_Model {
 
 				/* Check the first 8kiB contains the string RGForms or GFForms, which signifies our v3 templates */
 				if ( strpos( $file_data, 'RGForms' ) === false && strpos( $file_data, 'GFForms' ) === false ) {
-					throw new Exception( sprintf( esc_html__( 'The PHP file %s is not a valid PDF Template.', 'gravity-pdf' ), $basename ) );
+					throw new Exception( sprintf( esc_html__( 'The PHP file %s is not a valid PDF Template.', 'gravity-pdf' ), esc_html( $basename ) ) );
 				}
 			}
 		}
@@ -416,7 +412,7 @@ class Model_Templates extends Helper_Abstract_Model {
 	 */
 	public function get_template_info( $files = [] ) {
 		return array_map(
-			function( $file ) {
+			function ( $file ) {
 				return $this->templates->get_template_info_by_path( $file );
 			},
 			$files
@@ -434,7 +430,7 @@ class Model_Templates extends Helper_Abstract_Model {
 		$dir = $this->get_unzipped_dir_name( $zip_path );
 
 		$this->misc->rmdir( $dir );
-		unlink( $zip_path );
+		@unlink( $zip_path ); //phpcs:ignore
 	}
 
 	/**
@@ -448,7 +444,7 @@ class Model_Templates extends Helper_Abstract_Model {
 		/* This occurs on an AJAX call so don't need to worry about removing the filter afterwards */
 		add_filter(
 			'filesystem_method',
-			function() {
+			function () {
 				return 'direct';
 			}
 		);

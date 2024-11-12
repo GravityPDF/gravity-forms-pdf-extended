@@ -876,17 +876,17 @@ class Model_PDF extends Helper_Abstract_Model {
 	/**
 	 * Create a PDF Link based on the current PDF settings and entry
 	 *
-	 * @param integer $pid      The PDF Form Settings ID
-	 * @param integer $id       The Gravity Form entry ID
-	 * @param boolean $download Whether the PDF should be downloaded or not
-	 * @param boolean $print    Whether we should mark the PDF to be printed
-	 * @param boolean $esc      Whether to escape the URL or not
+	 * @param integer $pid          The PDF Form Settings ID
+	 * @param integer $id           The Gravity Form entry ID
+	 * @param boolean $download     Whether the PDF should be downloaded or not
+	 * @param boolean $should_print Whether we should mark the PDF to be printed
+	 * @param boolean $esc          Whether to escape the URL or not
 	 *
 	 * @return string       Direct link to the PDF
 	 *
 	 * @since  4.0
 	 */
-	public function get_pdf_url( $pid, $id, $download = false, $print = false, $esc = true ) {
+	public function get_pdf_url( $pid, $id, $download = false, $should_print = false, $esc = true ) {
 		global $wp_rewrite;
 
 		if ( $esc !== true ) {
@@ -910,7 +910,7 @@ class Model_PDF extends Helper_Abstract_Model {
 
 			$url = user_trailingslashit( $url );
 
-			if ( $print ) {
+			if ( $should_print ) {
 				$url .= '?print=1';
 			}
 		} else {
@@ -920,7 +920,7 @@ class Model_PDF extends Helper_Abstract_Model {
 				$url .= '&action=download';
 			}
 
-			if ( $print ) {
+			if ( $should_print ) {
 				$url .= '&print=1';
 			}
 		}
@@ -928,7 +928,7 @@ class Model_PDF extends Helper_Abstract_Model {
 		/*
 		 * @since 4.2
 		 */
-		$url = apply_filters( 'gfpdf_get_pdf_url', $url, $pid, $id, $download, $print, $esc );
+		$url = apply_filters( 'gfpdf_get_pdf_url', $url, $pid, $id, $download, $should_print, $esc );
 
 		return esc_url_raw( $url );
 	}
@@ -979,7 +979,7 @@ class Model_PDF extends Helper_Abstract_Model {
 
 		$active_pdfs = array_filter(
 			$form['gfpdf_form_settings'] ?? [],
-			function( $pdf ) {
+			function ( $pdf ) {
 				return $pdf['active'] === true;
 			}
 		);
@@ -1045,7 +1045,7 @@ class Model_PDF extends Helper_Abstract_Model {
 
 		$active_pdfs = array_filter(
 			$form['gfpdf_form_settings'] ?? [],
-			function( $pdf ) {
+			function ( $pdf ) {
 				return $pdf['active'] === true;
 			}
 		);
@@ -1058,7 +1058,7 @@ class Model_PDF extends Helper_Abstract_Model {
 		$meta = [
 			'gfpdf-entry-details-list' => [
 				'title'         => esc_html__( 'PDFs', 'gravity-pdf' ),
-				'callback'      => function( $args ) {
+				'callback'      => function ( $args ) {
 					/* Only show the PDF metabox if a user has permission to view the documents */
 					if ( ! $this->can_user_view_pdf_with_capabilities() ) {
 						return;
@@ -1877,7 +1877,7 @@ class Model_PDF extends Helper_Abstract_Model {
 	/**
 	 * Swap out the array key
 	 *
-	 * @param array  $array           The array to be modified
+	 * @param array  $array_to_modify The array to be modified
 	 * @param string $key             The key to remove
 	 * @param string $replacement_key The new array key
 	 *
@@ -1885,15 +1885,15 @@ class Model_PDF extends Helper_Abstract_Model {
 	 *
 	 * @since 4.0
 	 */
-	public function replace_key( $array, $key, $replacement_key ) {
-		if ( $key !== $replacement_key && isset( $array[ $key ] ) ) {
+	public function replace_key( $array_to_modify, $key, $replacement_key ) {
+		if ( $key !== $replacement_key && isset( $array_to_modify[ $key ] ) ) {
 
 			/* Replace the array key with the actual field name */
-			$array[ $replacement_key ] = $array[ $key ];
-			unset( $array[ $key ] );
+			$array_to_modify[ $replacement_key ] = $array_to_modify[ $key ];
+			unset( $array_to_modify[ $key ] );
 		}
 
-		return $array;
+		return $array_to_modify;
 	}
 
 	/**
@@ -2006,7 +2006,9 @@ class Model_PDF extends Helper_Abstract_Model {
 				}
 
 				if ( $file->isReadable() && $file->getMTime() < $max_file_age ) {
-					( $file->isDir() ) ? $this->misc->rmdir( $file->getPathName() ) : unlink( $file->getPathName() );
+					( $file->isDir() ) ?
+						$this->misc->rmdir( $file->getPathName() ) :
+						@unlink( $file->getPathName() ); //phpcs:ignore
 				}
 			}
 		} catch ( Exception $e ) {
@@ -2178,7 +2180,7 @@ class Model_PDF extends Helper_Abstract_Model {
 		$flattened_fonts_array = [];
 		array_walk_recursive(
 			$fonts,
-			function( $val ) use ( &$flattened_fonts_array ) {
+			function ( $val ) use ( &$flattened_fonts_array ) {
 				$flattened_fonts_array[] = $val;
 			}
 		);
@@ -2563,7 +2565,7 @@ class Model_PDF extends Helper_Abstract_Model {
 		);
 
 		array_map(
-			function( $item ) use ( $form ) {
+			function ( $item ) use ( $form ) {
 				$item->label   = sprintf( esc_html__( 'Page %d', 'gravity-pdf' ), $item->pageNumber );
 				$item->content = $form['pagination']['pages'][ $item->pageNumber - 1 ] ?? '';
 			},

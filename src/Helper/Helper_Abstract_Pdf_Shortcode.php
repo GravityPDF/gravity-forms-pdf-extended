@@ -239,16 +239,16 @@ abstract class Helper_Abstract_Pdf_Shortcode extends Helper_Abstract_Model {
 	/**
 	 * Check for the shortcode and add the entry ID to it
 	 *
-	 * @param string $string   The text to search
+	 * @param string $text     The text to search
 	 * @param int    $entry_id The entry ID to add to our shortcode
 	 *
 	 * @return string
 	 *
 	 * @since 4.0
 	 */
-	protected function add_entry_id_to_shortcode( $string, $entry_id ) {
+	protected function add_entry_id_to_shortcode( $text, $entry_id ) {
 		/* Check if our shortcode exists and add the entry ID if needed */
-		$shortcode_information = $this->get_shortcode_information( static::SHORTCODE, $string );
+		$shortcode_information = $this->get_shortcode_information( static::SHORTCODE, $text );
 
 		if ( count( $shortcode_information ) > 0 ) {
 			foreach ( $shortcode_information as $shortcode ) {
@@ -256,12 +256,12 @@ abstract class Helper_Abstract_Pdf_Shortcode extends Helper_Abstract_Model {
 				if ( ! isset( $shortcode['attr']['entry'] ) ) {
 					/* get the new shortcode information and update confirmation message */
 					$new_shortcode = $this->add_shortcode_attr( $shortcode, 'entry', $entry_id );
-					$string        = str_replace( $shortcode['shortcode'], $new_shortcode['shortcode'], $string );
+					$text          = str_replace( $shortcode['shortcode'], $new_shortcode['shortcode'], $text );
 				}
 			}
 		}
 
-		return $string;
+		return $text;
 	}
 
 	/**

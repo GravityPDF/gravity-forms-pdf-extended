@@ -64,7 +64,7 @@ if ( $collapsible ) {
 
 				<label class="gform-settings-panel__collapsible-toggle" for="<?php echo esc_attr( $collapsible_name ); ?>">
 					<span class="screen-reader-text">
-						<?php echo sprintf( esc_html__( 'Toggle %s Section', 'gravity-pdf' ), esc_html( $args['title'] ) ); ?>
+						<?php printf( esc_html__( 'Toggle %s Section', 'gravity-pdf' ), esc_html( $args['title'] ) ); ?>
 					</span>
 				</label>
 			</span>
@@ -91,7 +91,7 @@ if ( $collapsible ) {
 			}
 
 			array_map(
-				static function( $callback ) use ( $args ) {
+				static function ( $callback ) use ( $args ) {
 					call_user_func_array( $callback, $args['callback_args'] ?? [] );
 				},
 				$args['callback']

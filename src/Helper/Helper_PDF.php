@@ -348,7 +348,7 @@ class Helper_PDF {
 
 		/* save our PDF */
 		if ( ! file_put_contents( $this->path . $this->filename, $raw_pdf_string ) ) {
-			throw new Exception( sprintf( 'Could not save PDF: %s', $this->path . $this->filename ) );
+			throw new Exception( sprintf( 'Could not save PDF: %s', esc_html( $this->path . $this->filename ) ) );
 		}
 
 		return $this->path . $this->filename;
@@ -386,7 +386,7 @@ class Helper_PDF {
 		/* Check if there are version requirements */
 		$template_info = $this->templates->get_template_info_by_path( $this->template_path );
 		if ( ! $this->templates->is_template_compatible( $template_info['required_pdf_version'] ) ) {
-			throw new Exception( sprintf( esc_html__( 'The PDF Template %1$s requires Gravity PDF version %2$s. Upgrade to the latest version.', 'gravity-pdf' ), "<em>$template</em>", "<em>{$template_info['required_pdf_version']}</em>" ) );
+			throw new Exception( sprintf( esc_html__( 'The PDF Template %1$s requires Gravity PDF version %2$s. Upgrade to the latest version.', 'gravity-pdf' ), '<em>' . esc_html( $template ) . '</em>', '<em>' . esc_html( $template_info['required_pdf_version'] ) . '</em>' ) );
 		}
 	}
 
@@ -415,7 +415,7 @@ class Helper_PDF {
 		$valid = [ 'DISPLAY', 'DOWNLOAD', 'SAVE' ];
 
 		if ( ! in_array( strtoupper( $type ), $valid, true ) ) {
-			throw new Exception( sprintf( 'Display type not valid. Use %s', implode( ', ', $valid ) ) );
+			throw new Exception( sprintf( 'Display type not valid. Use %s', esc_html( implode( ', ', $valid ) ) ) );
 		}
 
 		$this->output = strtoupper( $type );
@@ -477,13 +477,13 @@ class Helper_PDF {
 		if ( ! in_array( strtolower( $mode ), $valid_mode, true ) ) {
 			/* determine if the mode is an integer */
 			if ( ! is_int( $mode ) || $mode <= 10 ) {
-				throw new Exception( sprintf( 'Mode must be an number value more than 10 or one of these types: %s', implode( ', ', $valid_mode ) ) );
+				throw new Exception( sprintf( 'Mode must be an number value more than 10 or one of these types: %s', esc_html( implode( ', ', $valid_mode ) ) ) );
 			}
 		}
 
 		/* check the layout */
 		if ( ! in_array( strtolower( $layout ), $valid_layout, true ) ) {
-			throw new Exception( sprintf( 'Layout must be one of these types: %s', implode( ', ', $valid_layout ) ) );
+			throw new Exception( sprintf( 'Layout must be one of these types: %s', esc_html( implode( ', ', $valid_layout ) ) ) );
 		}
 
 		$this->mpdf->SetDisplayMode( $mode, $layout );
@@ -493,18 +493,18 @@ class Helper_PDF {
 	/**
 	 * Public Method to allow the print dialog to be display when PDF is opened
 	 *
-	 * @param boolean $print Whether the PDF should open the print dialog every time the PDF is opened
+	 * @param boolean $show_print_dialog Whether the PDF should open the print dialog every time the PDF is opened
 	 *
 	 * @throws Exception
 	 *
 	 * @since 4.0
 	 */
-	public function set_print_dialog( $print = true ) {
-		if ( ! is_bool( $print ) ) {
+	public function set_print_dialog( $show_print_dialog = true ) {
+		if ( ! is_bool( $show_print_dialog ) ) {
 			throw new Exception( 'Only boolean values true and false can been passed to setPrintDialog().' );
 		}
 
-		$this->print = $print;
+		$this->print = $show_print_dialog;
 	}
 
 	/**
@@ -757,7 +757,7 @@ class Helper_PDF {
 		];
 
 		if ( ! in_array( $paper_size, $valid_paper_size, true ) ) {
-			throw new Exception( sprintf( 'Paper size not valid. Use %s', implode( ', ', $valid_paper_size ) ) );
+			throw new Exception( sprintf( 'Paper size not valid. Use %s', esc_html( implode( ', ', $valid_paper_size ) ) ) );
 		}
 
 		/* set our paper size and orientation based on user selection */
