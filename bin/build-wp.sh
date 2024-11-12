@@ -59,7 +59,7 @@ rm -f -R "${PACKAGE_DIR}/webpack-configs"
 # Generate language files
 cd "${PACKAGE_DIR}"
 npm install --global wp-pot-cli
-wp-pot --domain gravity-pdf --src 'src/**/*.php' --src 'pdf.php' --src 'api.php' --src 'gravity-pdf-updater.php' --package 'Gravity PDF' --dest-file src/assets/languages/gravity-pdf.pot > /dev/null
+wp-pot --domain gravity-pdf --src 'src/**/*.php' --src 'pdf.php' --src 'api.php' --package 'Gravity PDF' --dest-file src/assets/languages/gravity-pdf.pot > /dev/null
 
 # Replace text domain
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -70,6 +70,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i '' -e "s/Text Domain: gravity-pdf/Text Domain: gravity-forms-pdf-extended/g" "./pdf.php"
   sed -i '' -E "s/Description: (.+) \(canonical\)/Description: \1/g" "./pdf.php"
   sed -i '' -e "s|Update URI: https://gravitypdf.com||g" "./pdf.php"
+  sed -i '' -e "s|/vdp/gravity-pdf|/vdp/gravity-forms-pdf-extended|g" "./readme.txt"
 else
   # unix support
   find "." -type f -name '*.php' -print0 | LC_ALL=C xargs -0 sed -i -e "s/'gravity-pdf'/'gravity-forms-pdf-extended'/g"
@@ -78,6 +79,7 @@ else
   sed -i -e "s/Text Domain: gravity-pdf/Text Domain: gravity-forms-pdf-extended/g" "./pdf.php"
   sed -i -E "s/Description: (.+) \(canonical\)/Description: \1/g" "./pdf.php"
   sed -i -e "s|Update URI: https://gravitypdf.com||g" "./pdf.php"
+  sed -i -e "s|/vdp/gravity-pdf|/vdp/gravity-forms-pdf-extended|g" "./readme.txt"
 fi;
 
 # Remove updater
