@@ -123,6 +123,7 @@ No. Gravity PDF can only be used with Gravity Forms. It cannot generate PDFs for
 == Changelog ==
 
 = 6.12.4 =
+* Security: Escape variables in PHP Exceptions
 * Bug: Improve PDF column support when Gravity Forms includes a spacer
 * Bug: Fix display of Website field when it isn't filled in and *Show Empty Fields* is enabled
 * Housekeeping: Mark as compatible with WP 6.7
