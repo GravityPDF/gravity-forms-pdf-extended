@@ -87,6 +87,20 @@ Gravity PDF can be run on most modern shared web hosting without any issues. It 
 * After activating the plugin you will be prompted to [run the Core Font Installation tool](https://docs.gravitypdf.com/v6/users/core-pdf-fonts) so Gravity PDF can function correctly. This tool will download the fonts [from a public _GitHub_ repository (maintained by Gravity PDF)](https://github.com/gravityPDF/mpdf-core-fonts). For further information about _GitHub_ you can refer to their [Terms of Service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service) and/or [Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement#the-short-version).
 * [A Help page is provided in the plugin's settings](https://docs.gravitypdf.com/v6/users/global-settings#help-tab) with an instant search feature [of the Gravity PDF documentation](https://docs.gravitypdf.com/v6/users/five-minute-install/), and the search is powered by _Algolia_. For further information about _Algolia_ you can refer to their [Terms of Service](https://www.algolia.com/policies/terms/) and/or [Privacy Statement](https://www.algolia.com/policies/privacy/).
 
+== Frequently Asked Questions ==
+
+= I found a security issue. How do I responsibly disclose it? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/gravity-pdf)
+
+= Do I need Gravity Forms to use this plugin? =
+
+Yes. Gravity PDF has been specifically built for Gravity Forms, and will not work without it.
+
+= Does Gravity PDF work with any other form builder plugin? =
+
+No. Gravity PDF can only be used with Gravity Forms. It cannot generate PDFs for WPForms, Ninja Forms, Contact Form 7, Formidable Forms etc.
+
 == Screenshots ==
 
 1. Select various PDF templates (designs), attach to Notification emails, give a unique filename using merge tags, and apply conditional logic to the PDF
